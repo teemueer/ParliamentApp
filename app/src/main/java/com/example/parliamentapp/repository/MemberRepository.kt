@@ -13,8 +13,7 @@ import java.lang.Exception
 class MemberRepository(private val database: MemberDatabase) {
 
     private val _status = MutableLiveData<Status>()
-    val status: LiveData<Status>
-        get() = _status
+    val status: LiveData<Status> get() = _status
 
     init {
         _status.postValue(Status.DONE)

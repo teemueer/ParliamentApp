@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="party" type="String" />
-        <variable name="partyListener" type="com.example.parliamentapp.ui.adapter.PartyListener" />
+        <variable name="member" type="com.example.parliamentapp.database.member.Member" />
+        <variable name="memberListener" type="com.example.parliamentapp.ui.adapter.MemberListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +13,12 @@
         android:layout_height="48dp" >
 
         <Button
-            android:id="@+id/button_party"
+            android:id="@+id/button_member"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="8dp"
-            android:text="@{party}"
-            android:onClick="@{() -> partyListener.onClick(party)}"
+            android:text="@{@string/member_full_name(member.last, member.first)}"
+            android:onClick="@{() -> memberListener.onClick(member)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

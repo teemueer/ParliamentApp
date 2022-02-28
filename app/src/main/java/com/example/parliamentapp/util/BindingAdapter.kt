@@ -2,6 +2,7 @@ package com.example.parliamentapp.util
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.parliamentapp.database.member.Member
 
 @BindingAdapter("party")
 fun TextView.bindParties(party: String) {
