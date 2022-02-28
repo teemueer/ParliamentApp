@@ -3,6 +3,7 @@ package com.example.parliamentapp.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.parliamentapp.api.MemberApi
+import com.example.parliamentapp.database.member.Member
 import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.util.Status
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +35,7 @@ class MemberRepository(private val database: MemberDatabase) {
         }
     }
 
-    fun getMembers(party: String) = database.dao.getMembers(party)
-    fun getParties() = database.dao.getParties()
+    fun getMembers(party: String) : LiveData<List<Member>> = database.dao.getMembers(party)
+    fun getParties() : LiveData<List<String>> = database.dao.getParties()
+    fun getMember(personNumber: Int) : LiveData<Member> = database.dao.getMember(personNumber)
 }

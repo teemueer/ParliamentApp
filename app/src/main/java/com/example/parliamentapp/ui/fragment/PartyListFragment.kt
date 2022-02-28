@@ -22,12 +22,12 @@ class PartyListFragment : Fragment() {
     private lateinit var binding: FragmentPartyListBinding
     private lateinit var viewModel: PartyListViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val application = requireNotNull(this.activity).application
         val database = MemberDatabase.getDatabase(application)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_party_list, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel = ViewModelProvider(this, PartyListViewModelFactory(database))
             .get(PartyListViewModel::class.java)

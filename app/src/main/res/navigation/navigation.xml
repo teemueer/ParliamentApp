@@ -21,6 +21,18 @@
         <argument
             android:name="party"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_member_list_to_fragment_member"
+            app:destination="@id/fragment_member" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_member"
+        android:name="com.example.parliamentapp.ui.fragment.MemberFragment"
+        tools:layout="@layout/fragment_member">
+        <argument
+            android:name="personNumber"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

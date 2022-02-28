@@ -1,8 +1,11 @@
 package com.example.parliamentapp.util
 
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import com.example.parliamentapp.database.member.Member
+import com.bumptech.glide.Glide
+import timber.log.Timber
 
 @BindingAdapter("party")
 fun TextView.bindParties(party: String) {
@@ -18,4 +21,19 @@ fun TextView.bindParties(party: String) {
         "vihr" ->   "Vihreät"
         else -> party
     })
+}
+
+@BindingAdapter("imageUrl")
+fun bindImage(imageView: ImageView, picture: String?) {
+    picture?.let {
+        val imgUrl = "https://avoindata.eduskunta.fi/$picture"
+        Timber.d(imgUrl)
+        val imgUri = imgUrl.toUri()
+            .buildUpon()
+            .scheme("https")
+            .build()
+        Glide.with(imageView.context)
+            .load(imgUri)
+            .into(imageView)
+    }
 }
