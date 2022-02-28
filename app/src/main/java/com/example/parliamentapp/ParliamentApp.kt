@@ -32,7 +32,7 @@ class ParliamentApp : Application() {
             .build()
 
         // Repeat once a day
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS)
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(15, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()
 

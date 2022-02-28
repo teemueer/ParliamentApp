@@ -13,10 +13,6 @@ import retrofit2.http.GET
 object MemberApi {
     private const val BASE_URL = "https://users.metropolia.fi/~peterh/"
 
-    private val _status = MutableLiveData<Status>()
-    val status: LiveData<Status>
-        get() = _status
-
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
@@ -27,10 +23,6 @@ object MemberApi {
         .build()
 
     val service: MemberApiService = retrofit.create(MemberApiService::class.java)
-
-    init {
-        _status.postValue(Status.LOADING)
-    }
 }
 
 interface MemberApiService {
