@@ -5,27 +5,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+        <variable name="party" type="String" />
         <variable
             name="viewModel"
             type="com.example.parliamentapp.ui.viewmodel.MemberViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <ImageView
             android:id="@+id/image_member"
             android:layout_width="150dp"
             android:layout_height="200dp"
             app:imageUrl="@{viewModel.member.picture}"
-            android:contentDescription="@{@string/picture_description(viewModel.member.last)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/purple_500" />
+            android:contentDescription="@{@string/picture_description(viewModel.member.last)}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/member_full_name(viewModel.member.first, viewModel.member.last)}" />
+
+        <TextView
+            android:id="@+id/text_minister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minister"
+            android:visibility="@{viewModel.member.minister ? View.VISIBLE : View.GONE}"
+            />
+
+        <TextView
+            android:id="@+id/text_constituency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.member.constituency}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button_dislike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dislike"
+                android:onClick="@{() -> viewModel.dislike()}" />
+
+            <TextView
+                android:id="@+id/text_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@{String.valueOf(viewModel.likes)}" />
+
+            <Button
+                android:id="@+id/button_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/like"
+                android:onClick="@{() -> viewModel.like()}" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </layout>

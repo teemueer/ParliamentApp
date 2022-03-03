@@ -1,7 +1,7 @@
 package com.example.parliamentapp.database.member
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Entity(tableName = "members", primaryKeys = ["person_number"])
 data class Member(
@@ -16,3 +16,22 @@ data class Member(
     @ColumnInfo(name = "year_born")     val bornYear: Int,
     @ColumnInfo(name = "constituency")  val constituency: String
 )
+
+@Dao
+interface MemberDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(members: List<Member>)
+
+    @Query("SELECT * FROM members")
+    fun getMembers(): LiveData<List<Member>>
+
+    @Query("SELECT * FROM members WHERE party = :party ORDER BY last_name ASC")
+    fun getMembers(party: String): LiveData<List<Member>>
+
+    @Query("SELECT * FROM members WHERE person_number = :personNumber ORDER BY last_name ASC")
+    fun getMember(personNumber: Int): LiveData<Member>
+
+    @Query("SELECT DISTINCT party FROM members ORDER BY party ASC")
+    fun getParties(): LiveData<List<String>>
+
+}

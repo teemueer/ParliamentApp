@@ -3,7 +3,7 @@ package com.example.parliamentapp.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.parliamentapp.database.member.MemberDatabase.Companion.getDatabase
+import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.repository.MemberRepository
 import retrofit2.HttpException
 
@@ -13,7 +13,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) : Corouti
     }
 
     override suspend fun doWork(): Result {
-        val database = getDatabase(applicationContext)
+        val database = MemberDatabase.getInstance(applicationContext)
         val repository = MemberRepository(database)
 
         try {

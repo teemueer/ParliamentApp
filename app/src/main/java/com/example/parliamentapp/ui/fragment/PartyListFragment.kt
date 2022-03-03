@@ -1,5 +1,6 @@
 package com.example.parliamentapp.ui.fragment
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,12 +25,11 @@ class PartyListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val application = requireNotNull(this.activity).application
-        val database = MemberDatabase.getDatabase(application)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_party_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel = ViewModelProvider(this, PartyListViewModelFactory(database))
+        viewModel = ViewModelProvider(this, PartyListViewModelFactory(application))
             .get(PartyListViewModel::class.java)
 
         val adapter = PartyListAdapter(PartyListener { party ->
@@ -53,11 +53,11 @@ class PartyListFragment : Fragment() {
     }
 }
 
-class PartyListViewModelFactory(private val database: MemberDatabase) : ViewModelProvider.Factory {
+class PartyListViewModelFactory(val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("unchecked_cast")
         if (modelClass.isAssignableFrom(PartyListViewModel::class.java))
-            return PartyListViewModel(MemberRepository(database)) as T
+            return PartyListViewModel(application) as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
