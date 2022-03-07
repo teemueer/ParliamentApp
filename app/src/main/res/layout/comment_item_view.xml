@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable name="comment" type="com.example.parliamentapp.database.comment.Comment" />
         <variable name="commentListener" type="com.example.parliamentapp.ui.adapter.CommentListener" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,24 +21,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_delete"
-            android:layout_gravity="end"
             android:contentDescription="@string/delete_comment"
-            android:onClick="@{() -> commentListener.onClick(comment)}" />
+            android:onClick="@{() -> commentListener.onClick(comment)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/text_comment_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="italic"
-            commentDate="@{comment.date}" />
+            commentDate="@{comment.date}"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="@{comment.comment}" />
+            android:text="@{comment.comment}"
+            app:layout_constraintTop_toBottomOf="@+id/text_comment_date" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
