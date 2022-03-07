@@ -6,6 +6,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.parliamentapp.R
+import com.example.parliamentapp.database.comment.Comment
 import timber.log.Timber
 
 @BindingAdapter("party")
@@ -37,4 +38,9 @@ fun bindImage(imageView: ImageView, picture: String?) {
             .load(imgUri)
             .into(imageView)
     }
+}
+
+@BindingAdapter("commentDate")
+fun TextView.setSleepQualityString(date: Long) {
+    text = convertLongToDateString(date)
 }

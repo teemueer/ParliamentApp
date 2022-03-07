@@ -6,7 +6,6 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="party" type="String" />
         <variable
             name="viewModel"
             type="com.example.parliamentapp.ui.viewmodel.MemberViewModel" />
@@ -73,6 +72,27 @@
                 android:onClick="@{() -> viewModel.like()}" />
 
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_comment"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:autofillHints="name"
+            android:inputType="text"
+            android:hint="@string/add_a_comment" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_comment" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_comments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 

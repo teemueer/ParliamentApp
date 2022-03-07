@@ -1,21 +1,18 @@
 package com.example.parliamentapp.ui.fragment
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.parliamentapp.R
-import com.example.parliamentapp.database.likes.LikesDatabase
-import com.example.parliamentapp.database.member.Member
-import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.databinding.FragmentMemberBinding
-import com.example.parliamentapp.repository.LikesRepository
-import com.example.parliamentapp.repository.MemberRepository
+import com.example.parliamentapp.ui.adapter.CommentAdapter
+import com.example.parliamentapp.ui.adapter.CommentListener
 import com.example.parliamentapp.ui.viewmodel.MemberViewModel
 import timber.log.Timber
 
@@ -29,15 +26,34 @@ class MemberFragment : Fragment() {
         val arguments = MemberFragmentArgs.fromBundle(requireArguments())
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this, MemberViewModelFactory(application, arguments.personNumber))
             .get(MemberViewModel::class.java)
 
         binding.viewModel = viewModel
 
+        val adapter = CommentAdapter(CommentListener { comment ->
+            viewModel.onCommentDelete(comment)
+        })
+
+        binding.recyclerComments.adapter = adapter
+
+        viewModel.comments.observe(viewLifecycleOwner, { comments ->
+            Timber.d("comments yes")
+            comments?.let { adapter.submitList(comments) }
+        })
+
+        binding.buttonSave.setOnClickListener {
+            if (!binding.editComment.text.isEmpty()) {
+                viewModel.saveComment(binding.editComment.text.toString())
+                binding.editComment.text = null
+            }
+        }
+
         return binding.root
     }
+
 }
 
 class MemberViewModelFactory(val application: Application, val personNumber: Int) : ViewModelProvider.Factory {

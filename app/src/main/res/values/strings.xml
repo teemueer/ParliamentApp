@@ -5,4 +5,8 @@
     <string name="minister">Minister</string>
     <string name="like">Like</string>
     <string name="dislike">Dislike</string>
+    <string name="add_comment">Add comment</string>
+    <string name="delete_comment">Delete comment</string>
+    <string name="add_a_comment">Add a comment…</string>
+    <string name="save_comment">Save comment</string>
 </resources>
