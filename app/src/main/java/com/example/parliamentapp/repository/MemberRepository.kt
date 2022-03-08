@@ -1,6 +1,14 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Repository for fetching members from local database and refreshing the data
+ * from a remote source using api.
+ */
+
 package com.example.parliamentapp.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.parliamentapp.api.MemberApi
 import com.example.parliamentapp.database.member.Member
@@ -12,10 +20,10 @@ import java.lang.Exception
 
 class MemberRepository(private val database: MemberDatabase) {
 
+    // fetch member data from remote source
     suspend fun refresh() {
         withContext(Dispatchers.IO) {
             try {
-                Timber.d("refreshing database...")
                 val members = MemberApi.service.getMembers()
                 database.dao.insert(members)
             } catch (e: Exception) {

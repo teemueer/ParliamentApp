@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Overrides Application to setup background worker to update the database
+ */
+
 package com.example.parliamentapp
 
 import android.app.Application
@@ -24,7 +32,6 @@ class ParliamentApp : Application() {
         }
     }
 
-    // Create a worker for updating the database
     private fun setupRecurringWork() {
         // Require network connectivity
         val constraints = Constraints.Builder()

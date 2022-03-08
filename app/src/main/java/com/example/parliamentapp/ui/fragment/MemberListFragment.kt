@@ -1,3 +1,13 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Fragment for the member list.
+ * Inflates the layout and creates a view model with values to observe.
+ * Adapter is used to show members with recyclerview.
+ */
+
 package com.example.parliamentapp.ui.fragment
 
 import android.app.Application
@@ -11,13 +21,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parliamentapp.R
-import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.databinding.FragmentMemberListBinding
-import com.example.parliamentapp.repository.MemberRepository
 import com.example.parliamentapp.ui.adapter.MemberListAdapter
 import com.example.parliamentapp.ui.adapter.MemberListener
 import com.example.parliamentapp.ui.viewmodel.MemberListViewModel
-import timber.log.Timber
 
 class MemberListFragment : Fragment() {
 
@@ -31,6 +38,7 @@ class MemberListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // creates a view model with selected party as the argument
         viewModel = ViewModelProvider(this, MemberListViewModelFactory(application, arguments.party))
             .get(MemberListViewModel::class.java)
 
@@ -40,10 +48,12 @@ class MemberListFragment : Fragment() {
 
         binding.recyclerMemberList.adapter = adapter
 
+        // observe changes in members
         viewModel.members.observe(viewLifecycleOwner, { members ->
             members?.let { adapter.submitList(members) }
         })
 
+        // observe if a member is selected and navigate to member details if so
         viewModel.member.observe(viewLifecycleOwner, { member ->
             member?.let {
                 this.findNavController().navigate(MemberListFragmentDirections.actionFragmentMemberListToFragmentMember(member.personNumber))

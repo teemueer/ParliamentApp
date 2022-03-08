@@ -1,3 +1,12 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * ViewModel for the party list fragment.
+ * Gets parties from the member repository.
+ */
+
 package com.example.parliamentapp.ui.viewmodel
 
 import android.app.Application
@@ -18,6 +27,7 @@ class PartyListViewModel(application: Application) : ViewModel() {
         _party.value = party
     }
 
+    // called to prevent getting navigated back immediately when returning here
     fun reset() {
         _party.value = null
     }

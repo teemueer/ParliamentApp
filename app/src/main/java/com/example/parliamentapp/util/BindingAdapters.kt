@@ -1,3 +1,12 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Binding adapters called from resources in order to format values.
+ * Glide is used for image caching when picture of a member is called.
+ */
+
 package com.example.parliamentapp.util
 
 import android.widget.ImageView
@@ -5,10 +14,10 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.parliamentapp.R
-import com.example.parliamentapp.database.comment.Comment
-import timber.log.Timber
 
+// links abbreviations into party names
 @BindingAdapter("party")
 fun TextView.bindParties(party: String) {
     text = (when (party) {
@@ -25,22 +34,25 @@ fun TextView.bindParties(party: String) {
     })
 }
 
+// caches images using Glide and shows spinner while loading
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, picture: String?) {
     picture?.let {
         val imgUrl = "https://avoindata.eduskunta.fi/$picture"
-        Timber.d(imgUrl)
         val imgUri = imgUrl.toUri()
             .buildUpon()
             .scheme("https")
             .build()
         Glide.with(imageView.context)
             .load(imgUri)
+            .apply(RequestOptions()
+                .placeholder(R.drawable.loading_animation))
             .into(imageView)
     }
 }
 
+// format comment dates nicely
 @BindingAdapter("commentDate")
-fun TextView.setSleepQualityString(date: Long) {
+fun TextView.setCommentDate(date: Long) {
     text = convertLongToDateString(date)
 }

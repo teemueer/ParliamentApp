@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/drawable/loading_animation.xml" value="0.30092592592592593" />
+        <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/drawable/loading_img.xml" value="0.30092592592592593" />
         <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/layout/comment_item_view.xml" value="0.2717391304347826" />
         <entry key="..\:/Users/teemu/AndroidStudioProjects/ParliamentApp/app/src/main/res/layout/fragment_comment.xml" value="0.2717391304347826" />

@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Room database for Member class
+ */
+
 package com.example.parliamentapp.database.member
 
 import android.content.Context

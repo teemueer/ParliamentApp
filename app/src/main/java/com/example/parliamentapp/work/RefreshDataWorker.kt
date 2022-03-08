@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Worker that updates the database with latest remote data
+ */
+
 package com.example.parliamentapp.work
 
 import android.content.Context

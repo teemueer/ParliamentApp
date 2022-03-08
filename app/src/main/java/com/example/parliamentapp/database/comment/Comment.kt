@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Comments schema and data access object
+ */
+
 package com.example.parliamentapp.database.comment
 
 import androidx.lifecycle.LiveData

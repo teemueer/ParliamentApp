@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Member schema and data access object
+ */
+
 package com.example.parliamentapp.database.member
 
 import androidx.lifecycle.LiveData

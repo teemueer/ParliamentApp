@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Implements RecyclerView ListAdapter using data binding to display a list of members.
+ */
+
 package com.example.parliamentapp.ui.adapter
 
 import android.view.LayoutInflater
@@ -7,8 +15,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentapp.database.member.Member
 import com.example.parliamentapp.databinding.MemberItemViewBinding
-import com.example.parliamentapp.databinding.PartyItemViewBinding
-import com.example.parliamentapp.util.bindParties
 
 class MemberListAdapter(val clickListener: MemberListener) : ListAdapter<Member, MemberListAdapter.ViewHolder>(MemberListDiffCallback()) {
 

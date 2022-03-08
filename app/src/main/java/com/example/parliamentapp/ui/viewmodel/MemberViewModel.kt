@@ -1,3 +1,15 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * ViewModel for the member fragment.
+ * Uses all three repositories.
+ *
+ * Has functions for liking or disliking the member and
+ * adding or removing comments.
+ */
+
 package com.example.parliamentapp.ui.viewmodel
 
 import android.app.Application
@@ -14,7 +26,6 @@ import com.example.parliamentapp.repository.CommentRepository
 import com.example.parliamentapp.repository.LikesRepository
 import com.example.parliamentapp.repository.MemberRepository
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MemberViewModel(application: Application, private val personNumber: Int) : ViewModel() {
     private val memberRepository = MemberRepository(MemberDatabase.getInstance(application))
@@ -53,7 +64,7 @@ class MemberViewModel(application: Application, private val personNumber: Int) :
         }
     }
 
-    fun onCommentDelete(comment: Comment) {
+    fun deleteComment(comment: Comment) {
         viewModelScope.launch {
             comment.let { comment ->
                 commentRepository.delete(comment)

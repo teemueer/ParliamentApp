@@ -1,10 +1,18 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Fragment for the member details.
+ * Inflates the layout and creates a view model with values to observe.
+ * Adapter is used to show comments with recyclerview.
+ */
+
 package com.example.parliamentapp.ui.fragment
 
 import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -14,7 +22,6 @@ import com.example.parliamentapp.databinding.FragmentMemberBinding
 import com.example.parliamentapp.ui.adapter.CommentAdapter
 import com.example.parliamentapp.ui.adapter.CommentListener
 import com.example.parliamentapp.ui.viewmodel.MemberViewModel
-import timber.log.Timber
 
 class MemberFragment : Fragment() {
 
@@ -26,26 +33,28 @@ class MemberFragment : Fragment() {
         val arguments = MemberFragmentArgs.fromBundle(requireArguments())
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
+        // creates a view model with selected member as the argument
         viewModel = ViewModelProvider(this, MemberViewModelFactory(application, arguments.personNumber))
             .get(MemberViewModel::class.java)
 
         binding.viewModel = viewModel
 
         val adapter = CommentAdapter(CommentListener { comment ->
-            viewModel.onCommentDelete(comment)
+            viewModel.deleteComment(comment)
         })
 
         binding.recyclerComments.adapter = adapter
 
+        // observe changes in comments
         viewModel.comments.observe(viewLifecycleOwner, { comments ->
-            Timber.d("comments yes")
             comments?.let { adapter.submitList(comments) }
         })
 
+        // save comment on button click if something is written in the text field
         binding.buttonSave.setOnClickListener {
-            if (!binding.editComment.text.isEmpty()) {
+            if (binding.editComment.text.isNotEmpty()) {
                 viewModel.saveComment(binding.editComment.text.toString())
                 binding.editComment.text = null
             }

@@ -1,3 +1,13 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Fragment for the party list.
+ * Inflates the layout and creates a view model with values to observe.
+ * Adapter is used to show parties with recyclerview.
+ */
+
 package com.example.parliamentapp.ui.fragment
 
 import android.app.Application
@@ -11,9 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.parliamentapp.R
-import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.databinding.FragmentPartyListBinding
-import com.example.parliamentapp.repository.MemberRepository
 import com.example.parliamentapp.ui.adapter.PartyListAdapter
 import com.example.parliamentapp.ui.adapter.PartyListener
 import com.example.parliamentapp.ui.viewmodel.PartyListViewModel
@@ -29,6 +37,7 @@ class PartyListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_party_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // creates view model with the factory
         viewModel = ViewModelProvider(this, PartyListViewModelFactory(application))
             .get(PartyListViewModel::class.java)
 
@@ -38,10 +47,12 @@ class PartyListFragment : Fragment() {
 
         binding.recyclerPartyList.adapter = adapter
 
+        // observe changes in parties
         viewModel.parties.observe(viewLifecycleOwner, { parties ->
             parties?.let { adapter.submitList(parties) }
         })
 
+        // observe if a party is selected and navigate to member listing if so
         viewModel.party.observe(viewLifecycleOwner, { party ->
             party?.let {
                 this.findNavController().navigate(PartyListFragmentDirections.actionFragmentPartyListToFragmentMemberList(party))

@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Repository for fetching comments from local database.
+ */
+
 package com.example.parliamentapp.repository
 
 import androidx.lifecycle.LiveData

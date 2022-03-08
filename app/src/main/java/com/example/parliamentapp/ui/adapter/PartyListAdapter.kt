@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Implements RecyclerView ListAdapter using data binding to display a list of parties.
+ */
+
 package com.example.parliamentapp.ui.adapter
 
 import android.view.LayoutInflater

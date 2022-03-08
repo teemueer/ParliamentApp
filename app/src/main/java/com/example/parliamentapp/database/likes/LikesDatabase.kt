@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Room database for Likes class
+ */
+
 package com.example.parliamentapp.database.likes
 
 import android.content.Context

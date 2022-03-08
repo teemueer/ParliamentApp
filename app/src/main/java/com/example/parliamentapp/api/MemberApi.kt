@@ -1,9 +1,15 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Api with moshi and retrofit.
+ * Remote source serves JSON which is converted into Member objects.
+ */
+
 package com.example.parliamentapp.api
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.parliamentapp.database.member.Member
-import com.example.parliamentapp.util.Status
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

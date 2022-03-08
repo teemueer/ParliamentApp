@@ -1,3 +1,12 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * ViewModel for the member list fragment.
+ * Gets members from the member repository.
+ */
+
 package com.example.parliamentapp.ui.viewmodel
 
 import android.app.Application
@@ -7,7 +16,6 @@ import androidx.lifecycle.ViewModel
 import com.example.parliamentapp.database.member.Member
 import com.example.parliamentapp.database.member.MemberDatabase
 import com.example.parliamentapp.repository.MemberRepository
-import timber.log.Timber
 
 class MemberListViewModel(application: Application, party: String) : ViewModel() {
     private val repository = MemberRepository(MemberDatabase.getInstance(application))
@@ -21,6 +29,7 @@ class MemberListViewModel(application: Application, party: String) : ViewModel()
         _member.value = member
     }
 
+    // called to prevent getting navigated back immediately when returning here
     fun reset() {
         _member.value = null
     }

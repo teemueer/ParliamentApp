@@ -1,3 +1,11 @@
+/**
+ * 2022.03.08
+ * Teemu Eerola
+ * 1606161
+ *
+ * Implements RecyclerView ListAdapter using data binding to display a list of comments.
+ */
+
 package com.example.parliamentapp.ui.adapter
 
 import android.view.LayoutInflater
@@ -6,7 +14,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.parliamentapp.database.comment.Comment
-import com.example.parliamentapp.database.member.Member
 import com.example.parliamentapp.databinding.CommentItemViewBinding
 
 class CommentAdapter(val clickListener: CommentListener) : ListAdapter<Comment, CommentAdapter.ViewHolder>(CommentDiffCallback()) {
