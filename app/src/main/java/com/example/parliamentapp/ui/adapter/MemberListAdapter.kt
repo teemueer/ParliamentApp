@@ -18,8 +18,10 @@ import com.example.parliamentapp.databinding.MemberItemViewBinding
 
 class MemberListAdapter(val clickListener: MemberListener) : ListAdapter<Member, MemberListAdapter.ViewHolder>(MemberListDiffCallback()) {
 
+    // called when a new viewholder is needed to represent an item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
+    // display data at specified position
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val member: Member = getItem(position)
         holder.bind(member, clickListener)
@@ -27,6 +29,7 @@ class MemberListAdapter(val clickListener: MemberListener) : ListAdapter<Member,
 
     class ViewHolder(val binding: MemberItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        // bind xml items
         fun bind(item: Member, clickListener: MemberListener) {
             binding.member = item
             binding.memberListener = clickListener

@@ -18,8 +18,10 @@ import com.example.parliamentapp.util.bindParties
 
 class PartyListAdapter(val clickListener: PartyListener) : ListAdapter<String, PartyListAdapter.ViewHolder>(PartyListDiffCallback()) {
 
+    // called when a new viewholder is needed to represent an item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
+    // display data at specified position
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val party: String = getItem(position)
         holder.bind(party, clickListener)
@@ -28,6 +30,7 @@ class PartyListAdapter(val clickListener: PartyListener) : ListAdapter<String, P
 
     class ViewHolder(val binding: PartyItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        // bind xml items
         fun bind(item: String, clickListener: PartyListener) {
             binding.party = item
             binding.partyListener = clickListener
